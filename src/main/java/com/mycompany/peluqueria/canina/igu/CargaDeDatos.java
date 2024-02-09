@@ -4,11 +4,16 @@
  */
 package com.mycompany.peluqueria.canina.igu;
 
+import com.mycompany.peluqueria.canina.logica.Controladora;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Joaquin
  */
 public class CargaDeDatos extends javax.swing.JFrame {
+    
+    Controladora controladora = new Controladora();
 
     /**
      * Creates new form CargaDeDatos
@@ -26,6 +31,8 @@ public class CargaDeDatos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -48,6 +55,12 @@ public class CargaDeDatos extends javax.swing.JFrame {
         hasSpecialAtention = new javax.swing.JComboBox<>();
         cleanBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        dirDuenioTextField = new javax.swing.JTextField();
+
+        jTextField1.setText("jTextField1");
+
+        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,6 +139,19 @@ public class CargaDeDatos extends javax.swing.JFrame {
         });
 
         saveBtn.setText("Guardar");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Direccion duenio");
+
+        dirDuenioTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dirDuenioTextFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -142,9 +168,11 @@ public class CargaDeDatos extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel7)
                             .addComponent(jLabel9)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cleanBtn)
-                                .addComponent(jLabel8))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(cleanBtn))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)))
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +185,8 @@ public class CargaDeDatos extends javax.swing.JFrame {
                                 .addComponent(nameTextField)
                                 .addComponent(colorTextField)
                                 .addComponent(nameDuenioTextField)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                                .addComponent(dirDuenioTextField))
                             .addComponent(isAlergico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hasSpecialAtention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -196,11 +225,15 @@ public class CargaDeDatos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(celDuenioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(dirDuenioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cleanBtn)
                     .addComponent(saveBtn))
@@ -281,6 +314,7 @@ public class CargaDeDatos extends javax.swing.JFrame {
         nameTextField.setText("");
         obervationsTextArea.setText("");
         razaTextField.setText("");
+        dirDuenioTextField.setText("");
         
         
         isAlergico.setSelectedIndex(0);
@@ -289,15 +323,59 @@ public class CargaDeDatos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cleanBtnActionPerformed
 
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        // TODO add your handling code here:
+        
+         //aca vamos a obtener todos los datos del formulario y pasarselos 
+         //a la funcion de la controladora para que se encarge de guardarlos
+         //sea donde sea, 
+         //pero desde aca, solo pasamos los datos, de la logica se encarga
+         //la otra funcion...
+         
+         //DUENO
+         String duenoName = nameDuenioTextField.getText();
+         String duenoPhone = celDuenioTextField.getText();
+         String duenoAddress = dirDuenioTextField.getText();
+         
+         //MASCOTA
+         String petName = nameTextField.getText();
+         String petColor = colorTextField.getText();
+         String petRaza = razaTextField.getText();
+         String observations = obervationsTextArea.getText();
+         
+
+         String preIsAlergico = (String) isAlergico.getSelectedItem(); 
+         String preHasAtention = (String) hasSpecialAtention.getSelectedItem();
+         boolean petIsAlergico = preIsAlergico.contentEquals("Si") ? true : false;
+         boolean petHasSpecialAtention = preHasAtention.contentEquals("Si") ? true : false;
+    
+         controladora.guardarMascota(duenoName, duenoPhone, duenoAddress, petName, petColor, petRaza, observations, petIsAlergico, petHasSpecialAtention);
+         
+         
+         JOptionPane jOptionPane = new JOptionPane("Se guardo correctamente");
+         jOptionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+         JDialog dialog = jOptionPane.createDialog("Guardado exitoso");
+         dialog.setAlwaysOnTop(true);
+         dialog.setVisible(true);
+         
+         this.cleanBtnActionPerformed(evt);
+    }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void dirDuenioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirDuenioTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dirDuenioTextFieldActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField celDuenioTextField;
     private javax.swing.JButton cleanBtn;
     private javax.swing.JTextField colorTextField;
+    private javax.swing.JTextField dirDuenioTextField;
     private javax.swing.JComboBox<String> hasSpecialAtention;
     private javax.swing.JComboBox<String> isAlergico;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -309,6 +387,8 @@ public class CargaDeDatos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField nameDuenioTextField;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextArea obervationsTextArea;

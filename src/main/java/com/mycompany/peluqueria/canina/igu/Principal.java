@@ -29,6 +29,11 @@ public class Principal extends javax.swing.JFrame {
         jButton1.setText("Salir");
 
         jButton2.setText("Cargar datos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Ver datos");
 
@@ -97,6 +102,14 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        CargaDatos cargaDatos = new CargaDatos();
+        cargaDatos.setVisible(true);
+        cargaDatos.setLocation(null); //centra la pantalla en el medio cuando la abre
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -105,9 +105,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        CargaDatos cargaDatos = new CargaDatos();
+        CargaDeDatos cargaDatos = new CargaDeDatos();
         cargaDatos.setVisible(true);
-        cargaDatos.setLocation(null); //centra la pantalla en el medio cuando la abre
+        
+        cargaDatos.setLocationRelativeTo(null);
+       
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

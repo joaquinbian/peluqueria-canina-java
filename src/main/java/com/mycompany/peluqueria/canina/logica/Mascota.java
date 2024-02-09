@@ -1,6 +1,7 @@
 
 package com.mycompany.peluqueria.canina.logica;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.OneToOne;
 
 
 @Entity
-public class Mascota {
+public class Mascota implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

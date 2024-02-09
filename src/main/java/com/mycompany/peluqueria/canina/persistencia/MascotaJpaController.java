@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import static javax.persistence.Persistence.createEntityManagerFactory;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -23,6 +24,10 @@ public class MascotaJpaController implements Serializable {
 
     public MascotaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+    
+    public MascotaJpaController(){
+        emf = createEntityManagerFactory("peluqueria_caninaPU");
     }
     private EntityManagerFactory emf = null;
 

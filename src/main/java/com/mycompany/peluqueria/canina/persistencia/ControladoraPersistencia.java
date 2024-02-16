@@ -3,6 +3,7 @@ package com.mycompany.peluqueria.canina.persistencia;
 
 import com.mycompany.peluqueria.canina.logica.Dueno;
 import com.mycompany.peluqueria.canina.logica.Mascota;
+import java.util.List;
 
 
 public class ControladoraPersistencia {
@@ -16,5 +17,10 @@ public class ControladoraPersistencia {
          duenoJpaController.create(dueno);
          
          mascotaJpaController.create(mascota);
+     }
+     
+     public List<Mascota> obtenerMascotas(){
+         //obtenemos las mascotas
+         return mascotaJpaController.findMascotaEntities();
      }
 }

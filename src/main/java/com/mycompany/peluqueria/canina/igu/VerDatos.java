@@ -1,19 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.peluqueria.canina.igu;
 
-/**
- *
- * @author Joaquin
- */
+import com.mycompany.peluqueria.canina.logica.Controladora;
+import com.mycompany.peluqueria.canina.logica.Mascota;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 public class VerDatos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VerDatos
-     */
+    //siempre que declaremos una variable que luego vamos a inicializar, la seteamos a null
+    Controladora controladora = null;
+    
     public VerDatos() {
+        controladora = new Controladora();
         initComponents();
     }
 
@@ -30,12 +28,17 @@ public class VerDatos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaMascotas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setText("VISTA DE DATOS");
@@ -44,7 +47,7 @@ public class VerDatos extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaMascotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -55,7 +58,7 @@ public class VerDatos extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaMascotas);
 
         jLabel2.setText("Datos de la mascota");
 
@@ -137,6 +140,14 @@ public class VerDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        //Esto se ejecuta cuando se abre esta pantalla
+        //y aca ess cuando se tienen que traer los registros de mascotas
+        cargarTabla();
+    }//GEN-LAST:event_formWindowOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
@@ -146,6 +157,49 @@ public class VerDatos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaMascotas;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTabla() {
+        System.out.println("LLEGUE A CARGAR TABLAAAA");
+        //definir el modelo de la tabla
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+            //fila y columna no son editables
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        //nombre de las columnas y lo seteamos
+        String[] titulos = {"Num", "Nombre", "Color", "Raza", "Alergico", "At. Especial", "Dueno", "Cel"};
+        modeloTabla.setColumnIdentifiers(titulos);
+        
+        //carga de datos  de BD, obtenemos las mascotas
+        List<Mascota> listaMascotas = controladora.obtenerMascotas();
+        
+        //por cada mascota, creamos una lista con todas las propiedades y lo agregamos como una fila
+        for (Mascota mascota : listaMascotas) {
+            System.out.println(mascota.getNombre_mascota());
+            
+            //aca decimos que es de tipo objeto pq las listas solo pueden tener un tipo
+            //y como hay muchos tipos de datos en la mascota, mejor lo hacemos asi
+            Object[] mascotaRow = {
+                mascota.getNum_cliente(),
+                mascota.getNombre_mascota(),
+                mascota.getColor(),
+                mascota.getRaza(), 
+                mascota.isIsAlergico(),
+                mascota.isHasSpecialAtention(), 
+                mascota.getDueno().getDuenoName(),
+                mascota.getDueno().getPhone()};
+            modeloTabla.addRow(mascotaRow);
+        }
+        
+        
+        //con esto, linkeamos a la tabla de la UI con la tabla que creamos nosotros en el codigo
+        tablaMascotas.setModel(modeloTabla);
+        
+    }
+    
 }

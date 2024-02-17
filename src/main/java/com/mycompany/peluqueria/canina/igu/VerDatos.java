@@ -170,7 +170,13 @@ public class VerDatos extends javax.swing.JFrame {
                 controladora.eliminarMascota(num_cliente);
                 
                 mostrarMensaje("Eliminado exitosamente", "Mascota eliminada");
+            } else {
+                mostrarMensaje("No se puede eliminar si no has seleccionado nada","Error");
+
             }
+        } else {
+            mostrarMensaje("No se puede eliminar si la lista esta vacia","Error");
+                    
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

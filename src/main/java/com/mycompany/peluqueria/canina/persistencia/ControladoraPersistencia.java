@@ -29,7 +29,11 @@ public class ControladoraPersistencia {
      
      public void eliminarMascota(int num_cliente){
          try {
+             //al ser un 1 a 1, tambien habria que borrar al dueno, porque sino el dueno sigue quedando en la BD
+             //si fueran 1 A N, donde un dueno tiene muchas mascotas, podriamos dejarlo.
+             Mascota mascota = mascotaJpaController.findMascota(num_cliente);
              mascotaJpaController.destroy(num_cliente);
+             duenoJpaController.destroy(mascota.getDueno().getIdDueno());
          } catch (NonexistentEntityException ex) {
              Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
          }

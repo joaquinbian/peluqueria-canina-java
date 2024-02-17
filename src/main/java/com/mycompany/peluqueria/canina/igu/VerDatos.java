@@ -85,6 +85,11 @@ public class VerDatos extends javax.swing.JFrame {
         );
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,11 +190,39 @@ public class VerDatos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        
+          //tenemos que chequear si la tabla no esta vacia
+        if(tablaMascotas.getRowCount() != 0){
+            
+            
+            //si tenemos seleccionada una fila/registro
+            if(tablaMascotas.getSelectedRow() != -1){
+               int num_cliente = Integer.parseInt(String.valueOf(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0)));
+               
+               //luego debajo, llamamos a la nueva pantalla de editar mascota y le pasamos el id_cliente, para que busque
+               //la mascota en la db y carge los datos actuales
+                
+                EditarMascota editarMascota = new EditarMascota(num_cliente);
+                editarMascota.setVisible(true);
+                editarMascota.setLocationRelativeTo(null);
+            } else {
+                mostrarMensaje("No has seleccionado una mascota", "Error");
+            }
+            
+        } else {
+            mostrarMensaje("La lista esta vacia", "Error");
+
+        }
+   
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     
-    private void mostrarMensaje(String mensaje, String dialogText){
+    private void mostrarMensaje(String mensaje, String titulo){
         JOptionPane jOptionPane = new JOptionPane(mensaje);
          jOptionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-         JDialog dialog = jOptionPane.createDialog(dialogText);
+         JDialog dialog = jOptionPane.createDialog(titulo);
          dialog.setAlwaysOnTop(true);
          dialog.setVisible(true);
     }

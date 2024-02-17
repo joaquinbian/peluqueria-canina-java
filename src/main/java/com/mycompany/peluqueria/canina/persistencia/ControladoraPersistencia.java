@@ -27,6 +27,10 @@ public class ControladoraPersistencia {
          return mascotaJpaController.findMascotaEntities();
      }
      
+     public Mascota obtenerMascota(int num_cliente){
+         return mascotaJpaController.findMascota(num_cliente);
+     }
+     
      public void eliminarMascota(int num_cliente){
          try {
              //al ser un 1 a 1, tambien habria que borrar al dueno, porque sino el dueno sigue quedando en la BD

@@ -15,7 +15,8 @@ import javax.swing.JOptionPane;
 public class EditarMascota extends javax.swing.JFrame {
     
     Controladora controladora = null;
-    int id_mascota;
+   private int id_mascota;
+   private Mascota mascota;
 
     /**
      * Creates new form CargaDeDatos
@@ -345,7 +346,7 @@ public class EditarMascota extends javax.swing.JFrame {
          //pero desde aca, solo pasamos los datos, de la logica se encarga
          //la otra funcion...
          
-         /*
+         
          //DUENO
          String duenoName = nameDuenioTextField.getText();
          String duenoPhone = celDuenioTextField.getText();
@@ -363,17 +364,36 @@ public class EditarMascota extends javax.swing.JFrame {
          boolean petIsAlergico = preIsAlergico.contentEquals("Si") ? true : false;
          boolean petHasSpecialAtention = preHasAtention.contentEquals("Si") ? true : false;
     
-         controladora.guardarMascota(duenoName, duenoPhone, duenoAddress, petName, petColor, petRaza, observations, petIsAlergico, petHasSpecialAtention);
+         //controladora.guardarMascota(duenoName, duenoPhone, duenoAddress, petName, petColor, petRaza, observations, petIsAlergico, petHasSpecialAtention);
+         /*
+         Es importante pasarle el objeto viejo de mascota, el que recuperamos antes, ya que
+         tenemos la misma posicion en memoria del objeto original, es por eso
+         que JPA va a poder modificar el objeto REAL.
+         Ademas de ese objeto obtenemos el ID del dueno para editar
+*/
+         controladora.editarMascota(
+                 this.mascota,
+                 petName, 
+                 petColor,
+                 petRaza,
+                 observations,
+                 petIsAlergico,
+                 petHasSpecialAtention,
+                 duenoName,
+                 duenoPhone,
+                 duenoAddress
+               
+        );
+        
          
-         
-         JOptionPane jOptionPane = new JOptionPane("Se guardo correctamente");
+         JOptionPane jOptionPane = new JOptionPane("Se edito correctamente");
          jOptionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-         JDialog dialog = jOptionPane.createDialog("Guardado exitoso");
+         JDialog dialog = jOptionPane.createDialog("Editar Mascota");
          dialog.setAlwaysOnTop(true);
          dialog.setVisible(true);
          
          this.cleanBtnActionPerformed(evt);
-*/
+
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void dirDuenioTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirDuenioTextFieldActionPerformed
@@ -387,7 +407,7 @@ public class EditarMascota extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
     
     private void inicializarPantalla(){
-         Mascota mascota = controladora.obtenerMascota(this.id_mascota);
+          this.mascota = controladora.obtenerMascota(this.id_mascota);
          
          celDuenioTextField.setText(mascota.getDueno().getPhone());
         colorTextField.setText(mascota.getColor());

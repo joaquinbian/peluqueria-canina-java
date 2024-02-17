@@ -170,6 +170,8 @@ public class VerDatos extends javax.swing.JFrame {
                 controladora.eliminarMascota(num_cliente);
                 
                 mostrarMensaje("Eliminado exitosamente", "Mascota eliminada");
+                
+                cargarTabla();
             } else {
                 mostrarMensaje("No se puede eliminar si no has seleccionado nada","Error");
 
@@ -201,7 +203,6 @@ public class VerDatos extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-        System.out.println("LLEGUE A CARGAR TABLAAAA");
         //definir el modelo de la tabla
         DefaultTableModel modeloTabla = new DefaultTableModel() {
             //fila y columna no son editables

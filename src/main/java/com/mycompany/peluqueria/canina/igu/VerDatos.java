@@ -207,6 +207,10 @@ public class VerDatos extends javax.swing.JFrame {
                 EditarMascota editarMascota = new EditarMascota(num_cliente);
                 editarMascota.setVisible(true);
                 editarMascota.setLocationRelativeTo(null);
+                
+                //cerramos la ventana, para que luego de editar
+                //volvamos a abrirla y cargue la data actualizada
+                this.dispose();
             } else {
                 mostrarMensaje("No has seleccionado una mascota", "Error");
             }

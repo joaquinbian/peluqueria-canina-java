@@ -393,6 +393,13 @@ public class EditarMascota extends javax.swing.JFrame {
          dialog.setVisible(true);
          
          this.cleanBtnActionPerformed(evt);
+         
+         VerDatos verDatos = new VerDatos();
+         verDatos.setVisible(true);
+         verDatos.setLocationRelativeTo(null);
+         
+         //cierra la ventana
+         this.dispose();
 
     }//GEN-LAST:event_saveBtnActionPerformed
 

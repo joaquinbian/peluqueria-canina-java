@@ -3,6 +3,8 @@ package com.mycompany.peluqueria.canina.igu;
 import com.mycompany.peluqueria.canina.logica.Controladora;
 import com.mycompany.peluqueria.canina.logica.Mascota;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VerDatos extends javax.swing.JFrame {
@@ -85,6 +87,11 @@ public class VerDatos extends javax.swing.JFrame {
         btnEditar.setText("Editar");
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,6 +155,33 @@ public class VerDatos extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+        //tenemos que chequear si la tabla no esta vacia
+        if(tablaMascotas.getRowCount() != 0){
+            
+            //si tenemos seleccionada una fila/registro
+            if(tablaMascotas.getSelectedRow() != -1){
+                
+                //aca obtenemos el num de cliente, el num de cliente es la PK de la mascota, asi q con eso la podemos borrar
+                int num_cliente = Integer.parseInt(String.valueOf(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0)));
+                
+                controladora.eliminarMascota(num_cliente);
+                
+                mostrarMensaje("Eliminado exitosamente", "Mascota eliminada");
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    
+    private void mostrarMensaje(String mensaje, String dialogText){
+        JOptionPane jOptionPane = new JOptionPane(mensaje);
+         jOptionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+         JDialog dialog = jOptionPane.createDialog(dialogText);
+         dialog.setAlwaysOnTop(true);
+         dialog.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;

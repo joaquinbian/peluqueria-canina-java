@@ -33,4 +33,8 @@ public class Controladora {
         return controladoraPersistencia.obtenerMascotas();
     }
     
+    public void eliminarMascota(int num_cliente){
+        controladoraPersistencia.eliminarMascota(num_cliente);
+    }
+    
 }

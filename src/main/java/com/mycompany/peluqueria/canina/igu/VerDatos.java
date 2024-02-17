@@ -171,6 +171,9 @@ public class VerDatos extends javax.swing.JFrame {
                 
                 mostrarMensaje("Eliminado exitosamente", "Mascota eliminada");
                 
+                //volvemos a generar la tabla para mostrarle al usuario lo que realmente hay en la DB
+                //es importante ya que si no lo agregamos el usuario puede volverlo a eliminar o editarlo
+                //y rompe todo
                 cargarTabla();
             } else {
                 mostrarMensaje("No se puede eliminar si no has seleccionado nada","Error");
